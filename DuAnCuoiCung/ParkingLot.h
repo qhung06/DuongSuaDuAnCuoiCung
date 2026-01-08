@@ -6,6 +6,8 @@ class ParkingLot
     Ticket* ve[1000];
     int n;
     int max;
+    int soxemay;
+    int soxeoto;
 
 public:
     ParkingLot();
@@ -13,4 +15,5 @@ public:
     void themxe(const Date& datein);
     void xuatxe(const Date& dateout);
     void danhsachxe();
+    void kiemtrachotrong();
 };
