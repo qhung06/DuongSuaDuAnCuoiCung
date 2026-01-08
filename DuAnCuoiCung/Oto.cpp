@@ -2,10 +2,11 @@
 
 Oto::Oto()
 {
-	giave = 20000;
+    type = "Oto";
+    giave = 20000;
 }
 
-double Oto::getgiave()
+double Oto::getgiave() const
 {
-	return giave;
+    return giave;
 }

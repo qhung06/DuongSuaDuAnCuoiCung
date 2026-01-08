@@ -1,10 +1,10 @@
 #pragma once
 #include "Xe.h"
+
 class XeMay : public Xe
 {
-	double giave;
+    double giave;
 public:
-	XeMay();
-	double getgiave();
+    XeMay();
+    double getgiave() const override;
 };
-

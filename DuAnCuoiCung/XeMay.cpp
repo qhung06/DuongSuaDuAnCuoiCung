@@ -2,10 +2,11 @@
 
 XeMay::XeMay()
 {
-	giave = 5000;
+    type = "XeMay";
+    giave = 5000;
 }
 
-double XeMay::getgiave()
+double XeMay::getgiave() const
 {
-	return giave;
+    return giave;
 }

@@ -1,27 +1,9 @@
 #include "Xe.h"
 
-Xe::Xe()
-{
-	type = "";
-	plate = "";
-}
+Xe::Xe() : type(""), plate("") {}
 
-string Xe::gettype() 
-{
-	return type;
-}
+string Xe::gettype() const { return type; }
+string Xe::getplate() const { return plate; }
 
-string Xe::getplate() 
-{
-	return plate;
-}
-
-void Xe::settype(string type) 
-{
-	this->type = type;
-}
-
-void Xe::setplate(string plate) 
-{
-	this->plate = plate;
-}
+void Xe::settype(const string& type) { this->type = type; }
+void Xe::setplate(const string& plate) { this->plate = plate; }

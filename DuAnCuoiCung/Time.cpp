@@ -1,58 +1,39 @@
 #include "Time.h"
 
-Time::Time()
+Time::Time() : gio(0), phut(0) {}
+
+int Time::getgio() const { return gio; }
+int Time::getphut() const { return phut; }
+
+void Time::setgio(int gio) { this->gio = gio; }
+void Time::setphut(int phut) { this->phut = phut; }
+
+Time Time::operator-(const Time& t) const
 {
-	gio = 0;
-	phut = 0;
+    Time kq;
+    int total1 = gio * 60 + phut;
+    int total2 = t.gio * 60 + t.phut;
+    int diff = total1 - total2;
+
+    kq.gio = diff / 60;
+    kq.phut = diff % 60;
+    return kq;
 }
 
-float Time::getgio()
+int Time::tohours() const
 {
-	return gio;
-}
-float Time::getphut()
-{
-	return phut;
+    int totalMinutes = gio * 60 + phut;
+    return (totalMinutes + 59) / 60;
 }
 
-void Time::setgio(float gio)
+ostream& operator<<(ostream& os, const Time& t)
 {
-	this->gio = gio;
-}
-
-void Time::setphut(float phut)
-{
-	this->phut = phut;
-}
-
-Time Time::operator-(Time t)
-{
-	Time kq;
-	kq.gio = gio - t.gio;
-	kq.phut = phut - t.phut;
-	return kq;
-}
-
-int Time::tohours()
-{
-	float time1;
-	int time2;
-	time1 = gio + (phut / 60.0);
-	time2 = gio + (phut / 60.0);
-	if (time1 > time2)
-		time2 = time2 + 1;
-	return time2;
-}
-
-ostream& operator<<(ostream& os, Time t)
-{
-	os << t.gio << ":" << t.phut;
-	return os;
+    os << t.gio << ":" << t.phut;
+    return os;
 }
 
 istream& operator>>(istream& is, Time& t)
 {
-	is >> t.gio;
-	is >> t.phut;
-	return is;
+    is >> t.gio >> t.phut;
+    return is;
 }

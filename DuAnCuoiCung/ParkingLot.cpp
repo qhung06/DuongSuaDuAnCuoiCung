@@ -1,140 +1,212 @@
 #include "ParkingLot.h"
+#include <iostream>
 #include <fstream>
+
 using namespace std;
 
+// ================= CONSTRUCTOR =================
 ParkingLot::ParkingLot()
 {
-	for (int i = 0; i < 1000; i++)
-	{
-		ve[i] = new Ticket(i+1);
-	}
+    n = 0;
+    max = 1000;
 
-	ifstream fin("in.txt");
-	string type, plate;
-	Xe* xe=nullptr;
-	int id;
-	Time timein;
-	Date datein;
-	while (fin >> id >> type >> plate >> timein >> datein)
-	{
-		if (type == "XeMay")
-		{
-			xe = new XeMay();
-			xe->settype(type);
-			xe->setplate(plate);
-		}
-		if (type == "Oto")
-		{
-			xe = new Oto();
-			xe->settype(type);
-			xe->setplate(plate);
-		}
-		themxe(timein, datein, *xe);
-		n = id;
-		
-	}
+    for (int i = 0; i < max; i++)
+        ve[i] = nullptr;
+
+    ifstream finIn("in.txt");
+    ifstream finOut("out.txt");
+
+    int id;
+    string type, plate;
+    Time timein, timeout;
+    Date datein, dateout;
+    Xe* xe = nullptr;
+
+    // ----- ??c danh sách xe ?ang trong bãi -----
+    while (finIn >> id >> type >> plate >> timein >> datein)
+    {
+        ve[n] = new Ticket(id);
+
+        if (type == "XeMay") xe = new XeMay();
+        else if (type == "Oto") xe = new Oto();
+
+        xe->settype(type);
+        xe->setplate(plate);
+
+        ve[n]->taove(timein, datein, *xe);
+
+        delete xe;
+        xe = nullptr;
+
+        n++;
+    }
+
+    // ----- ??c danh sách xe ?ã xu?t -----
+    while (finOut >> id >> type >> plate >> timein >> datein >> timeout >> dateout)
+    {
+        ve[n] = new Ticket(id);
+
+        if (type == "XeMay") xe = new XeMay();
+        else if (type == "Oto") xe = new Oto();
+
+        xe->settype(type);
+        xe->setplate(plate);
+
+        ve[n]->taove(timein, datein, *xe);
+        ve[n]->settimeout(timeout);
+        ve[n]->setdateout(dateout);
+
+        delete xe;
+        xe = nullptr;
+
+        n++;
+    }
 }
 
-void ParkingLot::themxe(Time timein, Date datein, Xe& xe)
+// ================= THÊM XE =================
+void ParkingLot::themxe(const Date& datein)
 {
-	if (soluongxehienco < max)
-	{
-		ve[n]->taove(timein, datein, xe);
-		soluongxehienco++;
-		
-	}
-	else
-	{
-		cout << "Bai do xe da day!" << endl;
-	}
+    if (n >= max)
+    {
+        cout << "Bai do xe da day!\n";
+        return;
+    }
+
+    Xe* xe = nullptr;
+    string plate;
+    Time timein;
+    char ch;
+
+    cout << "1. Xe may\n2. O to\n0. Quay lai\n";
+    cin >> ch;
+
+    if (ch == '0') return;
+
+    if (ch == '1') xe = new XeMay();
+    else if (ch == '2') xe = new Oto();
+    else
+    {
+        cout << "Lua chon khong hop le!\n";
+        return;
+    }
+
+    cout << "Nhap bien so: ";
+    cin >> plate;
+    cout << "Nhap thoi gian vao: ";
+    cin >> timein;
+
+    xe->setplate(plate);
+
+    ve[n] = new Ticket(n + 1);
+    ve[n]->taove(timein, datein, *xe);
+
+    delete xe;
+    n++;
+
+    // ----- Ghi l?i file in.txt -----
+    ofstream fout("in.txt");
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->gettimeout().getgio() == 0 &&
+            ve[i]->gettimeout().getphut() == 0)
+        {
+            fout << ve[i]->getid() << " "
+                << ve[i]->getxe()->gettype() << " "
+                << ve[i]->getxe()->getplate() << " "
+                << ve[i]->gettimein().getgio() << " "
+                << ve[i]->gettimein().getphut() << " "
+                << ve[i]->getdatein().getngay() << " "
+                << ve[i]->getdatein().getthang() << " "
+                << ve[i]->getdatein().getnam() << endl;
+        }
+    }
+
 }
 
-void ParkingLot::xuatxe(int id, Time timeout, Date dateout)
+// ================= XU?T XE =================
+void ParkingLot::xuatxe(const Date& dateout)
 {
-	for (int i = 0; i < n; i++)
-	{
-		if (ve[i]->getid() == id)
-		{
-			ve[i]->xuatve(timeout, dateout);
-			soluongxehienco--;
-			return;
-		}
-	}
+    int id;
+    Time timeout;
+
+    cout << "Nhap ID ve: ";
+    cin >> id;
+    cout << "Nhap thoi gian ra: ";
+    cin >> timeout;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->getid() == id)
+        {
+            ve[i]->xuatve(timeout, dateout);
+            break;
+        }
+    }
+
+    // ----- Ghi file in.txt -----
+    ofstream fout("in.txt");
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->gettimeout().getgio() == 0 &&
+            ve[i]->gettimeout().getphut() == 0)
+        {
+            fout << ve[i]->getid() << " "
+                << ve[i]->getxe()->gettype() << " "
+                << ve[i]->getxe()->getplate() << " "
+                << ve[i]->gettimein().getgio() << " "
+                << ve[i]->gettimein().getphut() << " "
+                << ve[i]->getdatein().getngay() << " "
+                << ve[i]->getdatein().getthang() << " "
+                << ve[i]->getdatein().getnam() << endl;
+        }
+    }
+
+
+    // ----- Ghi file out.txt -----
+    ofstream foutOut("out.txt");
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->gettimeout().getgio() != 0 ||
+            ve[i]->gettimeout().getphut() != 0)
+        {
+            foutOut << ve[i]->getid() << " "
+                << ve[i]->getxe()->gettype() << " "
+                << ve[i]->getxe()->getplate() << " "
+                << ve[i]->gettimein().getgio() << " "
+                << ve[i]->gettimein().getphut() << " "
+                << ve[i]->getdatein().getngay() << " "
+                << ve[i]->getdatein().getthang() << " "
+                << ve[i]->getdatein().getnam() << " "
+                << ve[i]->gettimeout().getgio() << " "
+                << ve[i]->gettimeout().getphut() << " "
+                << ve[i]->getdateout().getngay() << " "
+                << ve[i]->getdateout().getthang() << " "
+                << ve[i]->getdateout().getnam() << endl;
+        }
+    }
+
 }
 
-void ParkingLot::themxe(Date datein)
+// ================= DANH SÁCH XE =================
+void ParkingLot::danhsachxe()
 {
-	Xe* xe;
-	string type, plate;
-	Time timein;
-	cout << "1.Xe may" << endl;
-	cout << "2.O to" << endl;
-	cout << "0.Quay lai" << endl;
-	char choice;
-	cin >> choice;
-	switch (choice)
-	{
-	case '1':
-		xe = new XeMay();
-		xe->settype("XeMay");
-		cout << "Nhap bien so: ";
-		cin >> plate;
-		xe->setplate(plate);
-		cout << "Nhap thoi gian vao: " << endl;
-		cin >> timein;
-		themxe(timein, datein, *xe);
-		n++;
-		break;
-	case '2':
-		xe = new Oto();
-		xe->settype("Oto");
-		cout << "Nhap bien so: ";
-		cin >> plate;
-		xe->setplate(plate);
-		cout << "Nhap thoi gian vao: " << endl;
-		cin >> timein;
-		themxe(timein, datein, *xe);
-		n++;
-		break;
-	case '0':
-		break;
-	default:
-		cout << "Lua chon khong hop le!" << endl;
-		break;
-	}
+    cout << "===== DANH SACH XE DANG DO =====\n";
+    int dem = 0;
 
-	
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->gettimeout().getgio() == 0 &&
+            ve[i]->gettimeout().getphut() == 0)
+        {
+            cout << "ID: " << ve[i]->getid()
+                << " | Loai: " << ve[i]->getxe()->gettype()
+                << " | Bien so: " << ve[i]->getxe()->getplate()
+                << " | Vao: " << ve[i]->gettimein()
+                << " " << ve[i]->getdatein() << endl;
+            dem++;
+        }
+    }
+
+    if (dem == 0)
+        cout << "Khong co xe nao dang do!\n";
 }
-
-	void ParkingLot::xuatxe(Date dateout)
-	{
-		int id;
-		Time timeout;
-		cout << "Nhap ID ve xe: ";
-		cin >> id;
-		cout << "Nhap thoi gian ra: " << endl;
-		cin >> timeout;
-		xuatxe(id, timeout, dateout);
-		ofstream fout("in.txt");
-		for (int i = 0; i < n; i++)
-		{
-			if (ve[i]->gettimeout().getphut() == 0 && ve[i]->gettimeout().getgio() == 0)
-				fout << ve[i]->getid() << " " << ve[i]->getxe()->gettype() << " " << ve[i]->getxe()->getplate() << " " << ve[i]->gettimein().getgio() << " " << ve[i]->gettimein().getphut() << " " << ve[i]->getdatein().getngay() << " " << ve[i]->getdatein().getthang() << " " << ve[i]->getdatein().getnam() << endl;
-		}
-	}
-
-	void ParkingLot::danhsachxe()
-	{
-		int dem=0;
-		cout << "=====================DANH SACH XE DANG DO TAI BAI====================" << endl;
-		for (int i = 0; i < n; i++)
-		{
-			if (ve[i]->gettimeout().getphut()==0 && ve[i]->gettimeout().getgio() == 0)
-			{
-				cout << "ID ve: " << ve[i]->getid()<<"   Loai: "<< ve[i]->getxe()->gettype() << "   Bien so: " << ve[i]->getxe()->getplate() << "   Thoi gian vao: " << ve[i]->gettimein() << " " << ve[i]->getdatein() << endl;
-				dem++;
-			}
-		}
-		if (dem == 0)
-			cout << "Khong co xe nao dang do tai bai!" << endl;
-	}

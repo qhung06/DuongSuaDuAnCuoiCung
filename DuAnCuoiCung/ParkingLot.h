@@ -3,17 +3,14 @@
 
 class ParkingLot
 {
-	Ticket* ve[1000];
-	int max = 100;
-	int soluongxehienco;
-	int n=0;
+    Ticket* ve[1000];
+    int n;
+    int max;
+
 public:
-	ParkingLot();
-	void themxe(Time timein, Date datein, Xe& xe);
-	void xuatxe(int id, Time timeout, Date dateout);
-	void themxe(Date datein);
-	void xuatxe(Date dateout);
-	void danhsachxe();
+    ParkingLot();
 
+    void themxe(const Date& datein);
+    void xuatxe(const Date& dateout);
+    void danhsachxe();
 };
-

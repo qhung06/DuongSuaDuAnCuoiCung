@@ -1,78 +1,71 @@
 #include "Ticket.h"
+#include <iostream>
+using namespace std;
 
-Ticket::Ticket(int id)
+Ticket::Ticket(int id) : id(id), xe(nullptr), fee(0) {}
+
+Ticket::~Ticket()
 {
-	this->id = id;
-	xe = nullptr;
-	fee = 0;
+    delete xe;
 }
 
-void Ticket::taove(Time timein, Date datein, Xe &xe)        //????????????
+void Ticket::taove(const Time& timein, const Date& datein, const Xe& xe)
 {
-	this->timein = timein;
-	this->datein = datein;
-	this->xe = &xe;
+    this->timein = timein;
+    this->datein = datein;
+
+    if (xe.gettype() == "Oto")
+        this->xe = new Oto();
+    else
+        this->xe = new XeMay();
+
+    this->xe->setplate(xe.getplate());
 }
 
-void Ticket::xuatve(Time timeout, Date dateout)
+void Ticket::settimeout(const Time& timeout)
 {
-	this->timeout = timeout;
-	this->dateout = dateout;
-	int totalhours = (dateout - datein).tohours() + (timeout - timein).tohours();
-	if (xe->gettype() == "Oto")
-	{
-		Xe *temp;
-		temp = new Oto();
-		fee = totalhours * temp->getgiave();
-	}
-	else if (xe->gettype() == "XeMay")
-	{
-		Xe* temp;
-		temp = new XeMay();
-		fee = totalhours * temp->getgiave();
-	}
-	cout << "=========VE XE=========" << endl;
-	cout << "ID ve: " << id << endl;
-	cout << "Loai xe: " << xe->gettype() << endl;
-	cout << "Bien so: " << xe->getplate() << endl;
-	cout << "Thoi gian vao: " << timein << endl;
-	cout << "Ngay vao: " << datein << endl;
-	cout << "Thoi gian ra: " << timeout << endl;
-	cout << "Ngay ra: " << dateout << endl;
-	cout << "-----------------------" << endl;
-	cout << "Tong phi: " << fee << " VND" << endl;
+    this->timeout = timeout;
 }
 
-int Ticket::getid()
+void Ticket::setdateout(const Date& dateout)
 {
-	return id;
+    this->dateout = dateout;
 }
 
-Xe* Ticket::getxe()
+void Ticket::xuatve(const Time& timeout, const Date& dateout)
 {
-	return xe;
-}
+    this->timeout = timeout;
+    this->dateout = dateout;
 
-Time Ticket::gettimein()
-{
-	return timein;
-}
+    // Quy ??i toàn b? th?i gian v? t?ng s? gi?
+    int gioVao = datein.tohours() + timein.tohours();
+    int gioRa = dateout.tohours() + timeout.tohours();
 
-Time Ticket::gettimeout()
-{
-	return timeout;
-}
+    int tongGio = gioRa - gioVao;
 
-Date Ticket::getdatein()
-{
-	return datein;
-}
+    // ??m b?o t?i thi?u 1 gi? g?i
+    if (tongGio < 1)
+        tongGio = 1;
 
-Date Ticket::getdateout()
-{
-	return dateout;
+    // Tính ti?n tr?c ti?p t? ??i t??ng xe
+    fee = tongGio * xe->getgiave();
+
+    // In vé
+    cout << "========= VE XE =========" << endl;
+    cout << "ID ve: " << id << endl;
+    cout << "Loai xe: " << xe->gettype() << endl;
+    cout << "Bien so: " << xe->getplate() << endl;
+    cout << "Thoi gian vao: " << timein << " " << datein << endl;
+    cout << "Thoi gian ra:  " << timeout << " " << dateout << endl;
+    cout << "Tong so gio gui: " << tongGio << endl;
+    cout << "Tong tien: " << fee << " VND" << endl;
 }
 
 
 
-
+int Ticket::getid() const { return id; }
+Xe* Ticket::getxe() const { return xe; }
+Time Ticket::gettimein() const { return timein; }
+Time Ticket::gettimeout() const { return timeout; }
+Date Ticket::getdatein() const { return datein; }
+Date Ticket::getdateout() const { return dateout; }

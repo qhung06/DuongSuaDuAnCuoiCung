@@ -1,18 +1,21 @@
 #pragma once
 #include <string>
 using namespace std;
+
 class Xe
 {
-	string type;
-	string plate;
+protected:
+    string type;
+    string plate;
 public:
-	Xe();
-	string gettype();
-	string getplate();
-	void settype(string type);
-	void setplate(string plate);
-	virtual double getgiave() = 0;
+    Xe();
+    virtual ~Xe() {}
 
+    string gettype() const;
+    string getplate() const;
 
+    void settype(const string& type);
+    void setplate(const string& plate);
+
+    virtual double getgiave() const = 0;
 };
-
