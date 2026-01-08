@@ -16,4 +16,8 @@ public:
     void xuatxe(const Date& dateout);
     void danhsachxe();
     void kiemtrachotrong();
+    void timkiem();
+	void tinhdoanhthu();
+    void hienthixe();
+    void thongtinravao(const Date& today);
 };

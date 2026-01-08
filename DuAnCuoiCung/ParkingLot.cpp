@@ -1,8 +1,8 @@
 #include "ParkingLot.h"
 #include <iostream>
 #include <fstream>
-#define MAXXEMAY 20
-#define MAXOTO 30
+#define MAXXEMAY 11
+#define MAXOTO 7
 
 using namespace std;
 
@@ -295,3 +295,96 @@ void ParkingLot::kiemtrachotrong()
     cout << "Xe may: " << MAXXEMAY - soxemay << "\n";
     cout << "O to: " << MAXOTO - soxeoto << "\n";
 }
+
+void ParkingLot::timkiem()
+{
+    int index;
+    cout << "Nhap vao id ve: " << endl;
+    cin >> index;
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->getid() == index)
+        {
+            cout << "ID: " << ve[i]->getid() << endl
+                << " | Loai: " << ve[i]->getxe()->gettype() << endl
+                << " | Bien so: " << ve[i]->getxe()->getplate() << endl
+                << " | Vao: " << ve[i]->gettimein()
+                << " " << ve[i]->getdatein() << endl
+                << " | Ra: " << ve[i]->gettimeout()
+                << " " << ve[i]->getdateout() << endl;
+            return;
+        }
+   }
+}
+
+void ParkingLot::tinhdoanhthu()
+{
+	cout << "Nhap ngay can tinh doanh thu (d/m/y): ";
+	Date date;
+	cin >> date;
+	system("cls");
+    long long doanhthu = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->getdateout().getngay() == date.getngay() &&
+            ve[i]->getdateout().getthang() == date.getthang() &&
+            ve[i]->getdateout().getnam() == date.getnam())
+        {
+            doanhthu += ve[i]->getfee();
+        }
+    }
+    cout << "Doanh thu trong ngay " << date.getngay() << "/"
+        << date.getthang() << "/" << date.getnam() << " la: "
+        << doanhthu << " VND" << endl;
+}
+
+void ParkingLot::hienthixe()
+{
+    cout << "===== DANH SACH XE DA RA KHOI BAI =====\n";
+    int dem = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->gettimeout().getgio() != 0 ||
+            ve[i]->gettimeout().getphut() != 0)
+        {
+            cout << "ID: " << ve[i]->getid()
+                << " | Loai: " << ve[i]->getxe()->gettype()
+                << " | Bien so: " << ve[i]->getxe()->getplate()
+                << " | Vao: " << ve[i]->gettimein()
+                << " " << ve[i]->getdatein()
+                << " | Ra: " << ve[i]->gettimeout()
+                << " " << ve[i]->getdateout() << endl;
+            dem++;
+        }
+    }
+    if (dem == 0)
+        cout << "Khong co xe nao da ra khoi bai!\n";
+}
+
+void ParkingLot::thongtinravao(const Date& today)
+{
+    int xera = 0;
+    int xevao = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (ve[i]->getdateout().getngay() == today.getngay() &&
+            ve[i]->getdateout().getthang() == today.getthang() &&
+            ve[i]->getdateout().getnam() == today.getnam())
+        {
+            xera++;
+        }
+        if (ve[i]->getdatein().getngay() == today.getngay() &&
+            ve[i]->getdatein().getthang() == today.getthang() &&
+            ve[i]->getdatein().getnam() == today.getnam())
+        {
+            xevao++;
+        }
+    }
+    cout << "===== THONG TIN XE RA VAO TRONG NGAY " << today << " =====" << endl
+        << "Xe ra vao bai: " << xera + xevao << endl
+        << "Xe ra bai:     " << xera << endl
+        << "Xe vao bai:    " << xevao << endl;
+}
+
+
+

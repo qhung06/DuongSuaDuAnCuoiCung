@@ -19,6 +19,10 @@ void HeThong::menu()
 		cout << "2. Xuat xe khoi bai" << endl;
 		cout << "3. Danh sach xe dang do tai bai" << endl;
 		cout << "4. Kiem tra cho trong" << endl;
+		cout << "5. Tim kiem thong tin" << endl;
+		cout << "6. Tinh doanh thu trong ngay bat ky" << endl;
+		cout << "7. Thong tin bai do trong ngay lam viec" << endl;
+		cout << "8. Hien thi xe da ra khoi bai" << endl;
 		cout << "0. Thoat" << endl;
 		cout << "---------Ngay " <<ngaylamviec.getngay()<<" Thang "<< ngaylamviec.getthang()<<" Nam "<< ngaylamviec.getnam() << "---------" << endl;
 		cin >> choice;
@@ -40,6 +44,26 @@ void HeThong::menu()
 			break;
 		case '4':
 			bdx.kiemtrachotrong();
+			system("pause");
+			system("cls");
+			break;
+		case '5':
+			bdx.timkiem();
+			system("pause");
+			system("cls");
+			break;
+		case '6':	
+			bdx.tinhdoanhthu();
+			system("pause");
+			system("cls");
+			break;
+		case '7':
+			bdx.thongtinravao(ngaylamviec);
+			system("pause");
+			system("cls");
+			break;
+		case '8':
+			bdx.hienthixe();
 			system("pause");
 			system("cls");
 			break;

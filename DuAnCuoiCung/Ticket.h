@@ -10,7 +10,7 @@ class Ticket
     Xe* xe;
     Date datein, dateout;
     Time timein, timeout;
-    double fee;
+    long long fee;
 
 public:
     Ticket(int id);
@@ -28,4 +28,5 @@ public:
     Time gettimeout() const;
     Date getdatein() const;
     Date getdateout() const;
+    long long getfee() const;
 };
