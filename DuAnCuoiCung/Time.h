@@ -14,7 +14,6 @@ public:
     void setgio(int gio);
     void setphut(int phut);
 
-    Time operator-(const Time& t) const;
     int tohours() const;
 
     friend ostream& operator<<(ostream& os, const Time& t);

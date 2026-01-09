@@ -158,7 +158,7 @@ void ParkingLot::themxe(const Date& datein)
         }
         cout << "Nhap bien so: ";
         cin >> plate;
-        cout << "Nhap thoi gian vao: ";
+        cout << "Nhap thoi gian vao (gio/phut): ";
         cin >> timein;
 		system("cls");
 		cout << "Them xe thanh cong!\n";
@@ -190,7 +190,7 @@ void ParkingLot::themxe(const Date& datein)
 
 }
 
-// ================= XU?T XE =================
+// ================= XUAT XE =================
 void ParkingLot::xuatxe(const Date& dateout)
 {
     int id;
@@ -212,7 +212,7 @@ void ParkingLot::xuatxe(const Date& dateout)
         cout << "Khong tim thay ve voi ID da nhap!\n";
         return;
 	}
-    cout << "Nhap thoi gian ra: ";
+    cout << "Nhap thoi gian ra (gio/phut): ";
     cin >> timeout;
 
     for (int i = 0; i < n; i++)
