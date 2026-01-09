@@ -1,8 +1,7 @@
 #include "ParkingLot.h"
 #include <iostream>
 #include <fstream>
-#define MAXXEMAY 5
-#define MAXOTO 5
+
 
 using namespace std;
 
@@ -277,7 +276,7 @@ void ParkingLot::xuatxe(const Date& dateout)
 // ================= DANH SÁCH XE =================
 void ParkingLot::danhsachxe()
 {
-    cout << "====================== DANH SACH XE DANG DO ======================\n";
+    cout << "========================= DANH SACH XE DANG DO ==========================\n";
     int dem = 0;
 
     for (int i = 0; i < n; i++)
@@ -285,10 +284,10 @@ void ParkingLot::danhsachxe()
         if (ve[i]->gettimeout().getgio() == 0 &&
             ve[i]->gettimeout().getphut() == 0)
         {
-            cout << "ID: " << ve[i]->getid()
-                << " | Loai: " << ve[i]->getxe()->gettype()
-                << " | Bien so: " << ve[i]->getxe()->getplate()
-                << " | Vao: " << ve[i]->gettimein()
+            cout << "ID: " << setw(4) << setfill('0') << ve[i]->getid()
+                << " | Loai: " << setw(6) << setfill(' ') << ve[i]->getxe()->gettype()
+                << " | Bien so: " << setw(12) << setfill(' ') << ve[i]->getxe()->getplate()
+                << " | Vao: " << setw(4) << setfill(' ') << ve[i]->gettimein()
                 << " " << ve[i]->getdatein() << endl;
             dem++;
         }
@@ -318,7 +317,7 @@ void ParkingLot::timkiem()
         {
 			found = true;
             cout << "---------THONG TIN VE---------"<<endl;
-            cout << "ID:        " << ve[i]->getid() << endl
+            cout << "ID:        " << setw(4) << setfill('0') << ve[i]->getid() << endl
                  << "Loai:      " << ve[i]->getxe()->gettype() << endl
                  << "Bien so:   " << ve[i]->getxe()->getplate() << endl
                  << "Vao:       " << ve[i]->gettimein()
@@ -373,7 +372,7 @@ void ParkingLot::hienthixe()
         if (ve[i]->gettimeout().getgio() != 0 ||
             ve[i]->gettimeout().getphut() != 0)
         {
-            cout << "ID: " << ve[i]->getid()
+            cout << "ID: " << setw(4) << setfill('0') << ve[i]->getid()
                 << " | Loai: " << ve[i]->getxe()->gettype()
                 << " | Bien so: " << ve[i]->getxe()->getplate()
                 << " | Vao: " << ve[i]->gettimein()

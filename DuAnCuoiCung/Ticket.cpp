@@ -1,6 +1,7 @@
 #include "Ticket.h"
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 using namespace std;
 
 Ticket::Ticket(int id) : id(id), xe(nullptr), fee(0) {}
@@ -55,7 +56,7 @@ void Ticket::xuatve(const Time& timeout, const Date& dateout)
     cout<< "=======================================" << endl
         << "              VE GUI XE                " << endl
         << "=======================================" << endl
-        << "ID ve:               " << id << endl
+        << "ID ve:               " << setw(4) << setfill('0') <<id << endl
         << "Loai xe:             " << xe->gettype() << endl
         << "Bien so:             " << xe->getplate() << endl
         << "---------------------------------------" << endl
@@ -67,14 +68,6 @@ void Ticket::xuatve(const Time& timeout, const Date& dateout)
         << "=======================================" << endl
         << "    CAM ON QUY KHACH - HEN GAP LAI !    " << endl
         << "=======================================" << endl;
-    /*cout << "========= VE XE =========" << endl;
-    cout << "ID ve: " << id << endl;
-    cout << "Loai xe: " << xe->gettype() << endl;
-    cout << "Bien so: " << xe->getplate() << endl;
-    cout << "Thoi gian vao: " << timein << " " << datein << endl;
-    cout << "Thoi gian ra:  " << timeout << " " << dateout << endl;
-    cout << "Tong so gio gui: " << tongGio << endl;
-    cout << "Tong tien: " << fee << " VND" << endl;*/
 }
 
 

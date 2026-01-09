@@ -13,7 +13,25 @@ void HeThong::menu()
 	int choice;
 	do
 	{
-		
+		cout << "======================================================\n";
+		cout << "       HE THONG QUAN LY BAI DO XE THONG MINH\n";
+		cout << "======================================================\n";
+		cout << " Ngay lam viec: " << ngaylamviec << endl;
+		cout << " Dung tich bai do xe: " << MAXSLOT <<endl;
+		cout << "-------------------------------------------------------\n";
+		cout << " 1. Tiep nhan xe vao bai\n";
+		cout << " 2. Tra xe - tinh tien tu dong\n";
+		cout << " 3. Danh sach xe dang gui\n";
+		cout << " 4. Kiem tra so cho trong\n";
+		cout << " 5. Tim kiem thong tin ve\n";
+		cout << " 6. Thong ke doanh thu theo ngay bat ky\n";
+		cout << " 7. Bao cao tong hop ngay\n";
+		cout << " 8. Xem lich su xe ra vao\n";
+		cout << " 9. Thay doi ngay lam viec\n";
+		cout << " 0. Thoat chuong trinh\n";
+		cout << "======================================================\n";
+		cout << " Vui long chon chuc nang: ";
+		/*
 		cout << "=====MENU HE THONG QUAN LY BAI DO XE=====" << endl;
 		cout << "1. Them xe vao bai" << endl;
 		cout << "2. Xuat xe khoi bai" << endl;
@@ -25,7 +43,7 @@ void HeThong::menu()
 		cout << "8. Hien thi xe da ra khoi bai" << endl;
 		cout << "9. Thay doi ngay lam viec" << endl;
 		cout << "0. Thoat" << endl;
-		cout << "---------Ngay " <<ngaylamviec.getngay()<<" Thang "<< ngaylamviec.getthang()<<" Nam "<< ngaylamviec.getnam() << "---------" << endl;
+		cout << "---------Ngay " <<ngaylamviec.getngay()<<" Thang "<< ngaylamviec.getthang()<<" Nam "<< ngaylamviec.getnam() << "---------" << endl;*/
 		cin >> choice;
 		system("cls");
 		switch (choice)
