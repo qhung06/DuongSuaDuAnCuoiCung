@@ -10,7 +10,7 @@ void HeThong::menu()
 	cout << "Nhap ngay lam viec(d/m/y) "<<endl;
 	cin >> ngaylamviec;
 	system("cls");
-	char choice;
+	int choice;
 	do
 	{
 		
@@ -23,54 +23,63 @@ void HeThong::menu()
 		cout << "6. Tinh doanh thu trong ngay bat ky" << endl;
 		cout << "7. Thong tin bai do trong ngay lam viec" << endl;
 		cout << "8. Hien thi xe da ra khoi bai" << endl;
+		cout << "9. Thay doi ngay lam viec" << endl;
 		cout << "0. Thoat" << endl;
 		cout << "---------Ngay " <<ngaylamviec.getngay()<<" Thang "<< ngaylamviec.getthang()<<" Nam "<< ngaylamviec.getnam() << "---------" << endl;
 		cin >> choice;
 		system("cls");
 		switch (choice)
 		{
-		case '1':
+		case 1:
 			bdx.themxe(ngaylamviec);
+			system("pause");
 			system("cls");
 			break;
-		case '2':
+		case 2:
 			bdx.xuatxe(ngaylamviec);
+			system("pause");
 			system("cls");
 			break;
-		case '3':
+		case 3:
 			bdx.danhsachxe();
 			system("pause");
 			system("cls");
 			break;
-		case '4':
+		case 4:
 			bdx.kiemtrachotrong();
 			system("pause");
 			system("cls");
 			break;
-		case '5':
+		case 5:
 			bdx.timkiem();
 			system("pause");
 			system("cls");
 			break;
-		case '6':	
+		case 6:	
 			bdx.tinhdoanhthu();
 			system("pause");
 			system("cls");
 			break;
-		case '7':
+		case 7:
 			bdx.thongtinravao(ngaylamviec);
 			system("pause");
 			system("cls");
 			break;
-		case '8':
+		case 8:
 			bdx.hienthixe();
 			system("pause");
 			system("cls");
 			break;
-		case '0':
+		case 9:
+			cout << "Nhap ngay lam viec moi (d/m/y): " << endl;
+			cin >> ngaylamviec;
+			system("cls");
+			break;
+		case 0:
 			return;
 		default:
 			cout << "Lua chon khong hop le!" << endl;
+			system("pause");
 			system("cls");
 			continue;
 		}

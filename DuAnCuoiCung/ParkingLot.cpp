@@ -1,8 +1,8 @@
 #include "ParkingLot.h"
 #include <iostream>
 #include <fstream>
-#define MAXXEMAY 11
-#define MAXOTO 7
+#define MAXXEMAY 5
+#define MAXOTO 5
 
 using namespace std;
 
@@ -84,12 +84,18 @@ void ParkingLot::themxe(const Date& datein)
     string plate;
     Time timein;
     char ch;
-
+    if (soxemay >= MAXXEMAY && soxeoto >= MAXOTO)
+    {
+        cout << "Bai do xe da day!\n";
+        return;
+    }
+    else
     if (soxemay >= MAXXEMAY)
     {
         cout << "Xe may da day!\n";
         cout << "1. O to\n0. Quay lai\n";
         cin >> ch;
+        system("cls");
         if (ch == '0') return;
         if (ch == '1')
         {
@@ -102,11 +108,13 @@ void ParkingLot::themxe(const Date& datein)
             return;
         }
     }
+    else
         if (soxeoto >= MAXOTO)
         {
             cout << "O to da day!\n";
             cout << "1. Xe may\n0. Quay lai\n";
             cin >> ch;
+            system("cls");
             if (ch == '0') return;
             if (ch == '1')
             {
@@ -119,18 +127,12 @@ void ParkingLot::themxe(const Date& datein)
                 return;
             }
         }
-
-        if (soxemay >= MAXXEMAY && soxeoto >= MAXOTO)
-        {
-            cout << "Bai do xe da day!\n";
-            return;
-        }
-
+        
         if (soxemay < MAXXEMAY && soxeoto < MAXOTO)
         {
             cout << "1. Xe may\n2. O to\n0. Quay lai\n";
             cin >> ch;
-
+            system("cls");
             if (ch == '0') return;
 
             if (ch == '1')
@@ -154,9 +156,9 @@ void ParkingLot::themxe(const Date& datein)
         cin >> plate;
         cout << "Nhap thoi gian vao: ";
         cin >> timein;
-
+		system("cls");
+		cout << "Them xe thanh cong!\n";
         xe->setplate(plate);
-
         ve[n] = new Ticket(n + 1);
         ve[n]->taove(timein, datein, *xe);
 
@@ -181,7 +183,7 @@ void ParkingLot::themxe(const Date& datein)
             }
         }
 
-    }
+}
 
 // ================= XU?T XE =================
 void ParkingLot::xuatxe(const Date& dateout)
@@ -268,7 +270,7 @@ void ParkingLot::xuatxe(const Date& dateout)
 // ================= DANH SÁCH XE =================
 void ParkingLot::danhsachxe()
 {
-    cout << "===== DANH SACH XE DANG DO =====\n";
+    cout << "====================== DANH SACH XE DANG DO ======================\n";
     int dem = 0;
 
     for (int i = 0; i < n; i++)
@@ -292,28 +294,45 @@ void ParkingLot::danhsachxe()
 void ParkingLot::kiemtrachotrong()
 {
     cout << "Cho trong con lai: \n";
-    cout << "Xe may: " << MAXXEMAY - soxemay << "\n";
-    cout << "O to: " << MAXOTO - soxeoto << "\n";
+    cout << "Xe may: " << MAXXEMAY - soxemay <<"/" <<MAXXEMAY<<endl;
+    cout << "O to: " << MAXOTO - soxeoto <<"/" << MAXOTO << endl;
 }
 
 void ParkingLot::timkiem()
 {
     int index;
+	bool found = false;
     cout << "Nhap vao id ve: " << endl;
     cin >> index;
+    system("cls");
     for (int i = 0; i < n; i++)
     {
         if (ve[i]->getid() == index)
         {
+			found = true;
+            cout << "-----THONG TIN VE-----"<<endl;
             cout << "ID: " << ve[i]->getid() << endl
-                << " | Loai: " << ve[i]->getxe()->gettype() << endl
-                << " | Bien so: " << ve[i]->getxe()->getplate() << endl
-                << " | Vao: " << ve[i]->gettimein()
-                << " " << ve[i]->getdatein() << endl
-                << " | Ra: " << ve[i]->gettimeout()
-                << " " << ve[i]->getdateout() << endl;
+                << "Loai: " << ve[i]->getxe()->gettype() << endl
+                << "Bien so: " << ve[i]->getxe()->getplate() << endl
+                << "Vao: " << ve[i]->gettimein()
+                << " " << ve[i]->getdatein() << endl;
+                if( ve[i]->gettimeout().getgio() == 0 &&
+                    ve[i]->gettimeout().getphut() == 0)
+                {
+                    cout << "Ra: Xe chua ra khoi bai." << endl;
+                }
+                else
+                {
+                   cout << "Ra: " << ve[i]->gettimeout()
+                        << " " << ve[i]->getdateout() << endl;
+                   cout << "Thanh tien: "<<ve[i]->getfee()<<" VND"<<endl;
+                }
             return;
         }
+   }
+   if (!found)
+   {
+       cout << "Khong tim thay ve voi ID da nhap!\n";
    }
 }
 
@@ -340,7 +359,7 @@ void ParkingLot::tinhdoanhthu()
 
 void ParkingLot::hienthixe()
 {
-    cout << "===== DANH SACH XE DA RA KHOI BAI =====\n";
+    cout << "============================ DANH SACH XE DA RA KHOI BAI ============================\n";
     int dem = 0;
     for (int i = 0; i < n; i++)
     {
@@ -364,7 +383,12 @@ void ParkingLot::hienthixe()
 void ParkingLot::thongtinravao(const Date& today)
 {
     int xera = 0;
+	int otora = 0;
+	int xemayra = 0;
     int xevao = 0;
+	int otovao = 0;
+	int xemayvao = 0;
+	long long doanhthu = 0;
     for (int i = 0; i < n; i++)
     {
         if (ve[i]->getdateout().getngay() == today.getngay() &&
@@ -372,18 +396,33 @@ void ParkingLot::thongtinravao(const Date& today)
             ve[i]->getdateout().getnam() == today.getnam())
         {
             xera++;
+			if (ve[i]->getxe()->gettype() == "Oto")
+                otora++;
+            else if (ve[i]->getxe()->gettype() == "XeMay")
+                xemayra++;
+			doanhthu += ve[i]->getfee();
         }
         if (ve[i]->getdatein().getngay() == today.getngay() &&
             ve[i]->getdatein().getthang() == today.getthang() &&
             ve[i]->getdatein().getnam() == today.getnam())
         {
             xevao++;
+            if (ve[i]->getxe()->gettype() == "Oto")
+                otovao++;
+            else if (ve[i]->getxe()->gettype() == "XeMay")
+				xemayvao++;
         }
+
     }
-    cout << "===== THONG TIN XE RA VAO TRONG NGAY " << today << " =====" << endl
-        << "Xe ra vao bai: " << xera + xevao << endl
-        << "Xe ra bai:     " << xera << endl
-        << "Xe vao bai:    " << xevao << endl;
+    cout << "===== THONG BAI DO TRONG NGAY " << today << " =====" << endl
+        << "Tong xe ra vao bai: " << xera + xevao << endl <<endl
+        << "Xe ra bai: " << xera << endl
+		<< "  - O to: " << otora << endl
+		<< "  - Xe may: " << xemayra << endl
+        << "Xe vao bai: " << xevao << endl
+	    << "  - O to: " << otovao << endl
+		<< "  - Xe may: " << xemayvao << endl
+		<< "Doanh thu trong ngay: " << doanhthu << " VND" << endl;
 }
 
 

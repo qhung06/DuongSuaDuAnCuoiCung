@@ -60,7 +60,6 @@ void Ticket::xuatve(const Time& timeout, const Date& dateout)
     cout << "Thoi gian ra:  " << timeout << " " << dateout << endl;
     cout << "Tong so gio gui: " << tongGio << endl;
     cout << "Tong tien: " << fee << " VND" << endl;
-	system("pause");
 }
 
 
