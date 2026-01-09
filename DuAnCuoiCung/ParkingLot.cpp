@@ -365,7 +365,7 @@ void ParkingLot::tinhdoanhthu()
 
 void ParkingLot::hienthixe()
 {
-    cout << "============================ DANH SACH XE DA RA KHOI BAI ============================\n";
+    cout << "========================================= DANH SACH XE DA RA KHOI BAI =========================================\n";
     int dem = 0;
     for (int i = 0; i < n; i++)
     {
@@ -373,11 +373,11 @@ void ParkingLot::hienthixe()
             ve[i]->gettimeout().getphut() != 0)
         {
             cout << "ID: " << setw(4) << setfill('0') << ve[i]->getid()
-                << " | Loai: " << ve[i]->getxe()->gettype()
-                << " | Bien so: " << ve[i]->getxe()->getplate()
-                << " | Vao: " << ve[i]->gettimein()
+                << " | Loai: "<<setw(6) << setfill(' ') << ve[i]->getxe()->gettype()
+                << " | Bien so: " << setw(12) << setfill(' ') << ve[i]->getxe()->getplate()
+                << " | Thoi gian vao: " << ve[i]->gettimein()
                 << " " << ve[i]->getdatein()
-                << " | Ra: " << ve[i]->gettimeout()
+                << " | Thoi gian ra: " << ve[i]->gettimeout()
                 << " " << ve[i]->getdateout() << endl;
             dem++;
         }

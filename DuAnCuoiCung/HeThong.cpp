@@ -31,19 +31,6 @@ void HeThong::menu()
 		cout << " 0. Thoat chuong trinh\n";
 		cout << "======================================================\n";
 		cout << " Vui long chon chuc nang: ";
-		/*
-		cout << "=====MENU HE THONG QUAN LY BAI DO XE=====" << endl;
-		cout << "1. Them xe vao bai" << endl;
-		cout << "2. Xuat xe khoi bai" << endl;
-		cout << "3. Danh sach xe dang do tai bai" << endl;
-		cout << "4. Kiem tra cho trong" << endl;
-		cout << "5. Tim kiem thong tin" << endl;
-		cout << "6. Tinh doanh thu trong ngay bat ky" << endl;
-		cout << "7. Thong tin bai do trong ngay lam viec" << endl;
-		cout << "8. Hien thi xe da ra khoi bai" << endl;
-		cout << "9. Thay doi ngay lam viec" << endl;
-		cout << "0. Thoat" << endl;
-		cout << "---------Ngay " <<ngaylamviec.getngay()<<" Thang "<< ngaylamviec.getthang()<<" Nam "<< ngaylamviec.getnam() << "---------" << endl;*/
 		cin >> choice;
 		system("cls");
 		switch (choice)
