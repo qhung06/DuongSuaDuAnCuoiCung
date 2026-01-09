@@ -32,7 +32,6 @@ void HeThong::menu()
 		{
 		case 1:
 			bdx.themxe(ngaylamviec);
-			system("pause");
 			system("cls");
 			break;
 		case 2:

@@ -87,6 +87,7 @@ void ParkingLot::themxe(const Date& datein)
     if (soxemay >= MAXXEMAY && soxeoto >= MAXOTO)
     {
         cout << "Bai do xe da day!\n";
+        system("pause");
         return;
     }
     else
@@ -105,6 +106,7 @@ void ParkingLot::themxe(const Date& datein)
         else
         {
             cout << "Lua chon khong hop le!\n";
+            system("pause");
             return;
         }
     }
@@ -124,6 +126,7 @@ void ParkingLot::themxe(const Date& datein)
             else
             {
                 cout << "Lua chon khong hop le!\n";
+                system("pause");
                 return;
             }
         }
@@ -149,6 +152,7 @@ void ParkingLot::themxe(const Date& datein)
                 else
                 {
                     cout << "Lua chon khong hop le!\n";
+                    system("pause");
                     return;
                 }
         }
@@ -158,6 +162,7 @@ void ParkingLot::themxe(const Date& datein)
         cin >> timein;
 		system("cls");
 		cout << "Them xe thanh cong!\n";
+        system("pause");
         xe->setplate(plate);
         ve[n] = new Ticket(n + 1);
         ve[n]->taove(timein, datein, *xe);
