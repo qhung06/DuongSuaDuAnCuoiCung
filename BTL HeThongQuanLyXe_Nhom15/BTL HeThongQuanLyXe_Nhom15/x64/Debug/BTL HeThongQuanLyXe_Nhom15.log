@@ -1,0 +1,13 @@
+﻿  BTL HeThongQuanLyXe_Nhom15.cpp
+  Date.cpp
+  HeThong.cpp
+  Oto.cpp
+  ParkingLot.cpp
+  Ticket.cpp
+D:\hoc lao trinh huong\BTL HeThongQuanLyXe_Nhom15\BTL HeThongQuanLyXe_Nhom15\BTL HeThongQuanLyXe_Nhom15\Ticket.cpp(53,19): warning C4244: '=': conversion from 'double' to '__int64', possible loss of data
+D:\hoc lao trinh huong\BTL HeThongQuanLyXe_Nhom15\BTL HeThongQuanLyXe_Nhom15\BTL HeThongQuanLyXe_Nhom15\Ticket.cpp(92,23): warning C4244: '=': conversion from 'double' to '__int64', possible loss of data
+  Time.cpp
+  Xe.cpp
+  XeMay.cpp
+  Generating Code...
+  BTL HeThongQuanLyXe_Nhom15.vcxproj -> D:\hoc lao trinh huong\BTL HeThongQuanLyXe_Nhom15\BTL HeThongQuanLyXe_Nhom15\x64\Debug\BTL HeThongQuanLyXe_Nhom15.exe
