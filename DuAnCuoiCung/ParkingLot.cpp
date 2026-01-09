@@ -317,22 +317,22 @@ void ParkingLot::timkiem()
         if (ve[i]->getid() == index)
         {
 			found = true;
-            cout << "-----THONG TIN VE-----"<<endl;
-            cout << "ID: " << ve[i]->getid() << endl
-                << "Loai: " << ve[i]->getxe()->gettype() << endl
-                << "Bien so: " << ve[i]->getxe()->getplate() << endl
-                << "Vao: " << ve[i]->gettimein()
-                << " " << ve[i]->getdatein() << endl;
+            cout << "---------THONG TIN VE---------"<<endl;
+            cout << "ID:        " << ve[i]->getid() << endl
+                 << "Loai:      " << ve[i]->getxe()->gettype() << endl
+                 << "Bien so:   " << ve[i]->getxe()->getplate() << endl
+                 << "Vao:       " << ve[i]->gettimein()
+                 << " " << ve[i]->getdatein() << endl;
                 if( ve[i]->gettimeout().getgio() == 0 &&
                     ve[i]->gettimeout().getphut() == 0)
                 {
-                    cout << "Ra: Xe chua ra khoi bai." << endl;
+                   cout << "Ra: Xe chua ra khoi bai." << endl;
                 }
                 else
                 {
-                   cout << "Ra: " << ve[i]->gettimeout()
+                  cout << "Ra:         " << ve[i]->gettimeout()
                         << " " << ve[i]->getdateout() << endl;
-                   cout << "Thanh tien: "<<ve[i]->getfee()<<" VND"<<endl;
+                  cout << "Thanh tien: "<<ve[i]->getfee()<<" VND"<<endl;
                 }
             return;
         }
@@ -422,12 +422,12 @@ void ParkingLot::thongtinravao(const Date& today)
 
     }
     cout << "===== THONG BAI DO TRONG NGAY " << today << " =====" << endl
-        << "Tong xe ra vao bai: " << xera + xevao << endl <<endl
-        << "Xe ra bai: " << xera << endl
-		<< "  - O to: " << otora << endl
+        << "Tong xe ra vao bai: " << xera + xevao << endl
+        << "Xe ra bai:   " << xera << endl
+		<< "  - O to:   " << otora << endl
 		<< "  - Xe may: " << xemayra << endl
-        << "Xe vao bai: " << xevao << endl
-	    << "  - O to: " << otovao << endl
+        << "Xe vao bai:  " << xevao << endl
+	    << "  - O to:   " << otovao << endl
 		<< "  - Xe may: " << xemayvao << endl
 		<< "Doanh thu trong ngay: " << doanhthu << " VND" << endl;
 }
