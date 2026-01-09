@@ -17,7 +17,7 @@ void HeThong::menu()
 		cout << "       HE THONG QUAN LY BAI DO XE THONG MINH\n";
 		cout << "======================================================\n";
 		cout << " Ngay lam viec: " << ngaylamviec << endl;
-		cout << " Dung tich bai do xe: " << MAXSLOT <<endl;
+		cout << " Tong so cho: " << MAXSLOT <<"	  	   So cho trong: "<<MAXSLOT - bdx.getsoxemay() - bdx.getsoxeoto() << endl;
 		cout << "-------------------------------------------------------\n";
 		cout << " 1. Tiep nhan xe vao bai\n";
 		cout << " 2. Tra xe - tinh tien tu dong\n";

@@ -431,5 +431,14 @@ void ParkingLot::thongtinravao(const Date& today)
 		<< "Doanh thu trong ngay: " << doanhthu << " VND" << endl;
 }
 
+int ParkingLot::getsoxemay() const
+{
+    return soxemay;
+}
+
+int ParkingLot::getsoxeoto() const
+{
+    return soxeoto;
+}
 
 

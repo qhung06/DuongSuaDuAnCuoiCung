@@ -15,6 +15,9 @@ class ParkingLot
 public:
     ParkingLot();
 
+	int getsoxemay() const;
+	int getsoxeoto() const;
+
     void themxe(const Date& datein);
     void xuatxe(const Date& dateout);
     void danhsachxe();
