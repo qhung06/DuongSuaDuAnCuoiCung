@@ -201,7 +201,9 @@ void ParkingLot::xuatxe(const Date& dateout)
     cin >> id;
     for (int i = 0; i < n; i++)
     {
-        if (ve[i]->getid() == id)
+        if (ve[i]->getid() == id && 
+            ve[i]->gettimeout().getgio() == 0 &&
+            ve[i]->gettimeout().getphut() == 0)
             {
             found = true;
             break;
@@ -209,7 +211,7 @@ void ParkingLot::xuatxe(const Date& dateout)
     }
     if (!found)
     {
-        cout << "Khong tim thay ve voi ID da nhap!\n";
+        cout << "Khong tim thay xe dang do voi ID da nhap!\n";
         return;
 	}
     cout << "Nhap thoi gian ra (gio/phut): ";

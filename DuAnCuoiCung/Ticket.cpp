@@ -52,14 +52,29 @@ void Ticket::xuatve(const Time& timeout, const Date& dateout)
     fee = tongGio * xe->getgiave();
 	system("cls");
     // In vé
-    cout << "========= VE XE =========" << endl;
+    cout<< "=======================================" << endl
+        << "              VE GUI XE                " << endl
+        << "=======================================" << endl
+        << "ID ve:               " << id << endl
+        << "Loai xe:             " << xe->gettype() << endl
+        << "Bien so:             " << xe->getplate() << endl
+        << "---------------------------------------" << endl
+        << "Thoi gian ra:        " << timein << " " << datein << endl
+        << "Thoi gian vao:       " << timeout << " " << dateout << endl
+        << "---------------------------------------" << endl
+        << "Tong so gio gui:     " << tongGio << " gio" << endl
+        << "Tong tien:           " << fee <<" VND"<< endl
+        << "=======================================" << endl
+        << "    CAM ON QUY KHACH - HEN GAP LAI !    " << endl
+        << "=======================================" << endl;
+    /*cout << "========= VE XE =========" << endl;
     cout << "ID ve: " << id << endl;
     cout << "Loai xe: " << xe->gettype() << endl;
     cout << "Bien so: " << xe->getplate() << endl;
     cout << "Thoi gian vao: " << timein << " " << datein << endl;
     cout << "Thoi gian ra:  " << timeout << " " << dateout << endl;
     cout << "Tong so gio gui: " << tongGio << endl;
-    cout << "Tong tien: " << fee << " VND" << endl;
+    cout << "Tong tien: " << fee << " VND" << endl;*/
 }
 
 
