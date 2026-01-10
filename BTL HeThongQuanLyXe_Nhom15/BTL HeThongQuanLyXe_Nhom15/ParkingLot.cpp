@@ -54,7 +54,7 @@ ParkingLot::ParkingLot()
         n++;
     }
 
-    // ----- ??c danh sách xe ?ã xu?t -----
+    // ----- ??c danh sách xe ?Exu?t -----
     while (finOut >> id >> type >> plate >> timein >> datein >> timeout >> dateout)
     {
         ve[n] = new Ticket(id);
@@ -80,7 +80,6 @@ ParkingLot::ParkingLot()
 void ParkingLot::themxe(const Date& datein)
 {
     Xe* xe = nullptr;
-    string plate;
     Time timein;
     char ch;
     if (soxemay >= MAXXEMAY && soxeoto >= MAXOTO)
@@ -155,21 +154,22 @@ void ParkingLot::themxe(const Date& datein)
                 return;
             }
     }
-    cout << "Nhap bien so: ";
-    cin >> plate;
+    
+	xe->nhap();
+
     cout << "Nhap thoi gian vao (gio/phut): ";
     cin >> timein;
     system("cls");
     cout << "Them xe thanh cong!\n";
     system("pause");
-    xe->setplate(plate);
+
     ve[n] = new Ticket(n + 1);
     ve[n]->taove(timein, datein, *xe);
 
     delete xe;
     n++;
-
-    // ----- Ghi l?i file in.txt -----
+        
+    // ----- Ghi lai file in.txt -----
     ofstream fout("in.txt");
     for (int i = 0; i < n; i++)
     {
@@ -220,7 +220,12 @@ void ParkingLot::xuatxe(const Date& dateout)
     {
         if (ve[i]->getid() == id)
         {
+            ve[i]->getxe()->xuat();
+            cout << endl;
+            system("pause");
+
             ve[i]->xuatve(timeout, dateout);
+
             if (ve[i]->getxe()->gettype() == "XeMay")
                 soxemay--;
             else if (ve[i]->getxe()->gettype() == "Oto")
@@ -308,7 +313,7 @@ void ParkingLot::timkiem()
 {
     int index;
     bool found = false;
-    cout << "Nhap vao id ve: " << endl;
+    cout << "Nhap vao id ve: ";
     cin >> index;
     system("cls");
     for (int i = 0; i < n; i++)
@@ -324,7 +329,7 @@ void ParkingLot::timkiem()
                 << " " << ve[i]->getdatein() << endl;
             if (ve[i]->gettimeout().getgio() == 0 &&
                 ve[i]->gettimeout().getphut() == 0)
-            {
+            {  
                 cout << "Ra: Xe chua ra khoi bai." << endl;
             }
             else
@@ -347,7 +352,7 @@ void ParkingLot::tinhdoanhthu()
     cout << "Nhap ngay can tinh doanh thu (d/m/y): ";
     Date date;
     cin >> date;
-    system("cls");
+    system("cls"); 
     long long doanhthu = 0;
     for (int i = 0; i < n; i++)
     {

@@ -49,10 +49,10 @@ void Ticket::xuatve(const Time& timeout, const Date& dateout)
     if (tongGio < 1)
         tongGio = 1;
 
-    // Tính ti?n tr?c ti?p t? ??i t??ng xe
+    // Tú‹h ti?n tr?c ti?p t? ??i t??ng xe
     fee = tongGio * xe->getgiave();
     system("cls");
-    // In vé
+    // In vE
     cout << "=======================================" << endl
         << "              VE GUI XE                " << endl
         << "=======================================" << endl
@@ -60,8 +60,8 @@ void Ticket::xuatve(const Time& timeout, const Date& dateout)
         << "Loai xe:             " << xe->gettype() << endl
         << "Bien so:             " << xe->getplate() << endl
         << "---------------------------------------" << endl
-        << "Thoi gian ra:        " << timein << " " << datein << endl
-        << "Thoi gian vao:       " << timeout << " " << dateout << endl
+        << "Thoi gian vao:        " << timein << " " << datein << endl
+        << "Thoi gian ra:       " << timeout << " " << dateout << endl
         << "---------------------------------------" << endl
         << "Tong so gio gui:     " << tongGio << " gio" << endl
         << "Tong tien:           " << fee << " VND" << endl
@@ -88,7 +88,7 @@ long long Ticket::getfee() const {
     if (tongGio < 1)
         tongGio = 1;
 
-    // Tính ti?n tr?c ti?p t? ??i t??ng xe
+    // Tú‹h ti?n tr?c ti?p t? ??i t??ng xe
     feetemp = tongGio * xe->getgiave();
     return feetemp;
 }

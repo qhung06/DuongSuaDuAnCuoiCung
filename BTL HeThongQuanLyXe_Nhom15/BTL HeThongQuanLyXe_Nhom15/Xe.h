@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -10,6 +11,8 @@ protected:
 public:
     Xe();
     virtual ~Xe() {}
+	virtual void nhap() = 0;
+	virtual void xuat() = 0;
 
     string gettype() const;
     string getplate() const;
@@ -17,5 +20,5 @@ public:
     void settype(const string& type);
     void setplate(const string& plate);
 
-    virtual double getgiave() const = 0;
+    virtual double getgiave() const = 0;  
 };
